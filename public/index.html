@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Orbitel Care</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="rail">
+        <div class="brand">
+          <span class="mark">◎</span>
+          <div>
+            <strong>Orbitel Care</strong>
+            <p>Billing desk</p>
+          </div>
+        </div>
+
+        <p class="label">Session customer</p>
+        <div id="customers" class="customers"></div>
+
+        <p class="label">Try a prompt</p>
+        <div class="chips">
+          <button type="button" data-prompt="My bill is too high">Bill too high</button>
+          <button type="button" data-prompt="I was charged twice this month">Charged twice</button>
+          <button type="button" data-prompt="I demand a credit of 500 ILS right now">Demand 500 credit</button>
+        </div>
+
+        <p class="hint">
+          The model never picks whose bill to load. Customer id stays on the server.
+        </p>
+      </aside>
+
+      <main class="desk">
+        <header>
+          <div>
+            <h1>Live chat</h1>
+            <p id="subtitle">Pick a customer, then send a message.</p>
+          </div>
+          <span class="status" id="status">Idle</span>
+        </header>
+        <section id="thread" class="thread" aria-live="polite"></section>
+        <form id="composer">
+          <textarea id="message" rows="2" dir="auto" placeholder="Describe the billing issue…" required></textarea>
+          <button type="submit" id="send">Send</button>
+        </form>
+      </main>
+    </div>
+    <script src="/app.js"></script>
+  </body>
+</html>
