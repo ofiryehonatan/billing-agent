@@ -6,6 +6,15 @@ const sendBtn = document.getElementById("send");
 const statusEl = document.getElementById("status");
 const subtitleEl = document.getElementById("subtitle");
 
+// Shown in the "Thinking…" line after each tool call.
+const TOOL_PROGRESS = {
+  get_billing_data: "Checking your bill…",
+  get_available_plans: "Looking at plans…",
+  issue_credit: "Processing a credit…",
+  propose_plan_change: "Preparing a plan suggestion…",
+  open_support_ticket: "Opening a support ticket…",
+};
+
 let customerId = "c100";
 let busy = false;
 
@@ -63,12 +72,6 @@ async function sendMessage(text) {
   messageEl.value = "";
   setBusy(true);
   const working = addBubble("working", "Thinking…");
-  // Keep the indicator as the last bubble while the agent is still running.
-  const show = (kind, msg) => {
-    addBubble(kind, msg);
-    threadEl.appendChild(working);
-    threadEl.scrollTop = threadEl.scrollHeight;
-  };
   let finished = false;
   const handle = (line) => {
     if (!line.trim()) return;
@@ -79,7 +82,8 @@ async function sendMessage(text) {
       return;
     }
     if (event.type === "tool") {
-      show("tool", `[tool] ${event.name} ${JSON.stringify(event.input)} → ${JSON.stringify(event.output)}`);
+      // Tool calls stay out of the conversation; only update the progress line.
+      working.textContent = TOOL_PROGRESS[event.name] || "Working on it…";
     } else if (event.type === "done") {
       finished = true;
       addBubble("agent", event.text || "(empty reply)");

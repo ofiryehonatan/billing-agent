@@ -42,7 +42,7 @@ The agent loop in [`billing-agent.mjs`](billing-agent.mjs) sends the conversatio
 | `propose_plan_change` | Suggests a plan; the customer must confirm |
 | `open_support_ticket` | Hands the case to a human |
 
-The web UI ([`server.mjs`](server.mjs) and [`public/`](public/)) streams each tool call to the browser as it happens, so you can watch the agent work.
+The web UI ([`server.mjs`](server.mjs) and [`public/`](public/)) streams progress to the browser, showing a short status such as *"Checking your bill…"* while the agent works. The full tool calls and results are printed in the server's terminal.
 
 ### Mock customers
 
