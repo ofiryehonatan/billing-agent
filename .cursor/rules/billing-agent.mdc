@@ -1,0 +1,10 @@
+---
+description: Guardrails and workflow for the billing agent
+alwaysApply: true
+---
+- Never add a customer_id parameter to any tool. The customer id comes from ctx.
+- Do arithmetic and anomaly detection in code, not in the model.
+- Any change to agent behavior needs a new or updated case in CASES (or TOOL_CHECKS for validation in code).
+- Run `npm test` after every change and report the result.
+- Never write API keys into files other than the gitignored .env. Use environment variables.
+- See AGENTS.md for commands and the project map.
